@@ -1,4 +1,5 @@
 using CodePulse.API.Data;
+using CodePulse.API.Mappings;
 using CodePulse.API.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +17,8 @@ builder.Services.AddDbContext<CodePulseDbContext>(options => options.UseMySql(co
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
+
+builder.Services.AddAutoMapper(typeof(MappingProfiles));
 
 var app = builder.Build();
 
