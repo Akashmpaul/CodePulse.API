@@ -37,22 +37,30 @@ namespace CodePulse.API.Repository
             return categoryId;
         }
 
-        public async Task<Category?> GetCategoryById(Guid id)
+        public async Task<Category?> GetCategoryByIdAsync(Guid id)
         {
-            var categoryId = await codePulseDbContext.Categories.FirstOrDefaultAsync(c => c.Id == id);
+            return await codePulseDbContext.Categories.FirstOrDefaultAsync(c => c.Id == id);
 
-            if(categoryId == null)
-            {
-                return null;
-            }
+            //if(categoryId == null)
+            //{
+            //    return null;
+            //}
 
-            return await codePulseDbContext.Categories.FindAsync(categoryId);
+            //return await codePulseDbContext.Categories.FindAsync(categoryId);
 
         }
 
-        Task<Category?> ICategoryRepository.UpdatecategoryAsync(Category category)
+        public async Task<Category?> UpdatecategoryAsync(Guid id, Category category)
         {
-            throw new NotImplementedException();
+            var categoryId = await codePulseDbContext.Categories.FirstOrDefaultAsync(c => c.Id == id);
+            if(categoryId == null) 
+            {
+                return null;
+            }
+            categoryId.Name = category.Name;
+            categoryId.UrlHandle = category.UrlHandle;
+            await codePulseDbContext.SaveChangesAsync();
+            return categoryId;
         }
     }
 }

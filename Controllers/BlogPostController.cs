@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using CodePulse.API.Repository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodePulse.API.Controllers
@@ -7,5 +8,11 @@ namespace CodePulse.API.Controllers
     [ApiController]
     public class BlogPostController : ControllerBase
     {
+        private readonly IBlogPostRepository blogPostRepository;
+
+        public BlogPostController(IBlogPostRepository blogPostRepository)
+        {
+            this.blogPostRepository = blogPostRepository;
+        }
     }
 }
