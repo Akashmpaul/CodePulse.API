@@ -11,6 +11,8 @@ namespace CodePulse.API.Mappings
             CreateMap<AddcategoryDto, Category>().ReverseMap();
             CreateMap<Category, CategoryDto>().ReverseMap();
             CreateMap<UpdateCategoryDto, Category>().ReverseMap();
+            CreateMap<AddBlogPostDto, BlogPost>().ReverseMap();
+            CreateMap<BlogPost, BlogPostDto>().ReverseMap();
         }
     }
 }
