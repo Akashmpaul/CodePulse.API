@@ -34,5 +34,32 @@ namespace CodePulse.API.Controllers
             var blogPostDto = mapper.Map<BlogPostDto>(blogPostDomainModel);
             return Ok(blogPostDto);
         }
+
+        // Get all blog post
+        // Get
+        [HttpGet]
+        public async Task<IActionResult> GetAllBlogPost()
+        {
+            var blogPost = await blogPostRepository.GetAllBlogPostAsync();
+
+            //map domain  model with dto
+            var blogPostDto = mapper.Map<List<BlogPostDto>>(blogPost);
+            return Ok(blogPostDto);
+        }
+
+        //Get blog post by id
+        [HttpGet]
+        [Route("{id:guid}")]
+        public async Task<IActionResult> GetBlogPostById([FromRoute] Guid id)
+        {
+            var blogPostId = await blogPostRepository.GetBlogPostByIdAsync(id);
+            if(blogPostId == null)
+            {
+                return NotFound();
+            }
+            return Ok(blogPostId);
+        }
+
+        //update blog post
     }
 }
